@@ -7,6 +7,12 @@ public class Order {
     private ArrayList<OrderItem> orderItems;
     private MenuItem chosenMenu;
 
+    public Order(int totalPrice, ArrayList<OrderItem> orderItems, MenuItem chosenMenu) {
+        this.totalPrice = totalPrice;
+        this.orderItems = orderItems;
+        this.chosenMenu = chosenMenu;
+    }
+
     protected void addItem(MenuItem item){
         OrderItem oi = new OrderItem(item,1);
         orderItems.add(oi);
