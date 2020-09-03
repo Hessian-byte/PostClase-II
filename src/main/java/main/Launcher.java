@@ -3,6 +3,9 @@ package main;
 import guis.VentanaPedidos;
 
 public class Launcher {
-    VentanaPedidos ventana = new VentanaPedidos();
-    
+    public static void main(String[] args) {
+        VentanaPedidos ventana = new VentanaPedidos();
+        ventana.setVisible(true);
+    }
+
 }
