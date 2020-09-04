@@ -34,4 +34,9 @@ public class MenuItem {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
+
+    public Object[] getArrayObject(){
+        Object[] array = {productName,precioUnitario,codigo};
+        return array;
+    }
 }

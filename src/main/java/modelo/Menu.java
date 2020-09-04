@@ -10,9 +10,11 @@ public class Menu {
         this.menuItems = new ArrayList<MenuItem>();
         this.orders = new ArrayList<Order>();
     }
-    public void addMenuItem(MenuItem menuItem){
+
+    public void addMenuItem(MenuItem menuItem) {
         menuItems.add(menuItem);
     }
+
     public ArrayList<MenuItem> getMenuItems() {
         return menuItems;
     }
@@ -28,4 +30,10 @@ public class Menu {
     public void setOrders(ArrayList<Order> orders) {
         this.orders = orders;
     }
+
+    public Object[] getArrayMenuItem(int i){
+        return menuItems.get(i).getArrayObject();
+    }
+
+
 }

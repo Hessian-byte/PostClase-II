@@ -1,56 +1,60 @@
 package guis;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+
 import modelo.Menu;
 import modelo.MenuItem;
 
 public class MenuGUI extends JFrame implements ActionListener {
     private JPanel menuGui;
-    private JTable table1;
-    private JTextField productNametextField;
-    private JTextField priceTextField;
+
     private JTextField CodeTextField;
-    private JButton eliminarButton;
-    private JButton button3;
-    private JButton actualizarButton;
+    private JButton eliminarOrderItemButton;
+    private JButton agregarALaOrdenButton;
+    private JScrollPane tablaScrollPanel;
+    private JList list2;
+    private JTable tablaCatalogo;
+    private JScrollPane scrollPanelTabla;
     private Menu menu;
     private String[] columnNames = {"ProductName","Precio","Codigo"};
 
-    public void inicializarMenu(){
-        menu = new Menu();
-        menu.addMenuItem(new MenuItem("Manzana",200,"1000"));
-        menu.addMenuItem(new MenuItem("Pera",150,"2000"));
-        menu.addMenuItem(new MenuItem("Sandia",1000,"ASD123"));
-    }
-    public MenuGUI() throws HeadlessException {
-        try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                //System.out.println(info.getName());
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            // If Nimbus is not available, you can set the GUI to another look and feel.
-            System.out.println("Nimbus not Avaible");
-        }
-        inicializarMenu();
+
+    public MenuGUI(Menu menu) throws HeadlessException {
+        this.menu = menu; //el menu debe ser creado antes de lanzar la ventana, para ello se crea el menu en el Launcher
+        setLayout(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setContentPane(menuGui);
         this.pack();
         this.setResizable(true);
-        table1 = new JTable(null,columnNames);
-
-
     }
 
     public void actionPerformed(ActionEvent e) {
+
+    }
+
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+        //
+        DefaultTableModel modeloTabla = new DefaultTableModel();
+        modeloTabla.addColumn("ProductName");
+        modeloTabla.addColumn("Precio");
+        modeloTabla.addColumn("Codigo");
+
+        modeloTabla.addRow(menu.getArrayMenuItem(0));
+        modeloTabla.addRow(menu.getArrayMenuItem(1));
+        modeloTabla.addRow(menu.getArrayMenuItem(2));
+
+        tablaCatalogo = new JTable(modeloTabla);
+        tablaCatalogo.setModel(modeloTabla);
+        tablaCatalogo.setVisible(true);
+        tablaCatalogo.setBounds(0,0,100,100);
+        add(tablaCatalogo);
 
     }
 }
