@@ -9,5 +9,6 @@
         <module name="PostClase-II" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="14" />
   </component>
 </project>
