@@ -44,4 +44,8 @@ public class OrderItem {
     public void setPrice(int price) {
         this.price = price;
     }
+    public Object[] getArrayObject(){
+        Object[] array = {productName,quantity,price};
+        return array;
+    }
 }

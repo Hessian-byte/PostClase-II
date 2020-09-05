@@ -23,6 +23,10 @@ public class Menu {
         this.menuItems = menuItems;
     }
 
+    public MenuItem getMenuItem(int i){
+        return menuItems.get(i);
+    }
+
     public ArrayList<Order> getOrders() {
         return orders;
     }
