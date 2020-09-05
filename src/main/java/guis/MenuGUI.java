@@ -9,19 +9,21 @@ import java.awt.event.ActionListener;
 
 import modelo.Menu;
 import modelo.MenuItem;
+import modelo.OrderItem;
 
 public class MenuGUI extends JFrame implements ActionListener {
     private JPanel menuGui;
-
-    private JTextField CodeTextField;
     private JButton eliminarOrderItemButton;
     private JButton agregarALaOrdenButton;
     private JScrollPane tablaScrollPanel;
-    private JList list2;
-    private JTable tablaCatalogo;
+    private JTable catalogoTabla;
+    private DefaultTableModel catalogoModeloTabla;
     private JScrollPane scrollPanelTabla;
+    private JTable ordenTabla;
+    private DefaultTableModel ordenModeloTabla;
+    private JTextField cantidadTextField1;
     private Menu menu;
-    private String[] columnNames = {"ProductName","Precio","Codigo"};
+
 
 
     public MenuGUI(Menu menu) throws HeadlessException {
@@ -31,30 +33,64 @@ public class MenuGUI extends JFrame implements ActionListener {
         this.setContentPane(menuGui);
         this.pack();
         this.setResizable(true);
+        agregarALaOrdenButton.addActionListener(this);
+
     }
 
     public void actionPerformed(ActionEvent e) {
 
+        if(e.getSource()==agregarALaOrdenButton){
+
+                int filaSelecionada = catalogoTabla.getSelectedRow();
+                if (filaSelecionada == -1){
+                    JOptionPane.showMessageDialog(menuGui,"Usted no ha seleccionado un Item del menu","Error",JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                MenuItem menuItemSeleccionado = menu.getMenuItem(filaSelecionada);
+            try {
+                int cantidad = Integer.parseInt(cantidadTextField1.getText());
+                if (cantidad>0){
+                    OrderItem oi = new OrderItem(menuItemSeleccionado,cantidad);
+                    ordenModeloTabla.addRow(oi.getArrayObject());
+
+                }else{
+                    JOptionPane.showMessageDialog(menuGui,"La cantidad no puede ser 0 ó negativa","Error",JOptionPane.ERROR_MESSAGE);
+                }
+            }catch (NumberFormatException nfe){
+                JOptionPane.showMessageDialog(menuGui,"Debe ingresar un numero positivo en la cantidad","Error",JOptionPane.ERROR_MESSAGE);
+                cantidadTextField1.setText("");
+            }
+        }
+        if (e.getSource() == eliminarOrderItemButton){
+            int filaSelecionada = ordenTabla.getSelectedRow();
+            if (filaSelecionada == -1){
+                JOptionPane.showMessageDialog(menuGui,"Usted no ha seleccionado un Item de la orden","Error",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            ordenModeloTabla.removeRow(filaSelecionada);
+        }
     }
 
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
         //
-        DefaultTableModel modeloTabla = new DefaultTableModel();
-        modeloTabla.addColumn("ProductName");
-        modeloTabla.addColumn("Precio");
-        modeloTabla.addColumn("Codigo");
+        catalogoModeloTabla = new DefaultTableModel();
+        catalogoModeloTabla.addColumn("ProductName");
+        catalogoModeloTabla.addColumn("Precio");
+        catalogoModeloTabla.addColumn("Codigo");
 
-        modeloTabla.addRow(menu.getArrayMenuItem(0));
-        modeloTabla.addRow(menu.getArrayMenuItem(1));
-        modeloTabla.addRow(menu.getArrayMenuItem(2));
+        ordenModeloTabla = new DefaultTableModel();
+        ordenModeloTabla.addColumn("ProductName");
+        ordenModeloTabla.addColumn("Cantidad");
+        ordenModeloTabla.addColumn("Precio");
 
-        tablaCatalogo = new JTable(modeloTabla);
-        tablaCatalogo.setModel(modeloTabla);
-        tablaCatalogo.setVisible(true);
-        tablaCatalogo.setBounds(0,0,100,100);
-        add(tablaCatalogo);
+
+        catalogoModeloTabla.addRow(menu.getArrayMenuItem(0));
+        catalogoModeloTabla.addRow(menu.getArrayMenuItem(1));
+        catalogoModeloTabla.addRow(menu.getArrayMenuItem(2));
+        catalogoTabla = new JTable(catalogoModeloTabla);
+        ordenTabla = new JTable(ordenModeloTabla);
 
     }
 }
