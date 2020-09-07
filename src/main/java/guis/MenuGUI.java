@@ -22,6 +22,11 @@ public class MenuGUI extends JFrame implements ActionListener {
     private JTable ordenTabla;
     private DefaultTableModel ordenModeloTabla;
     private JTextField cantidadTextField1;
+    private JTextField textField1;
+    private JCheckBox deseaAgregarUnNumeroCheckBox;
+    private JTextField textField2;
+    private JButton emitirOrdenButton;
+    private JTable ordenesTabla;
     private Menu menu;
 
 
@@ -68,6 +73,7 @@ public class MenuGUI extends JFrame implements ActionListener {
                 return;
             }
             ordenModeloTabla.removeRow(filaSelecionada);
+            ordenTabla.setModel(ordenModeloTabla);
         }
     }
 
@@ -84,6 +90,7 @@ public class MenuGUI extends JFrame implements ActionListener {
         ordenModeloTabla.addColumn("ProductName");
         ordenModeloTabla.addColumn("Cantidad");
         ordenModeloTabla.addColumn("Precio");
+
 
 
         catalogoModeloTabla.addRow(menu.getArrayMenuItem(0));
