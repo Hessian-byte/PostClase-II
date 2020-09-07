@@ -1,0 +1,5 @@
+Este programa al ser ejecutado sirve como visualizador de un catálogo de compras y para confeccionar órdenes de productos a partir del catálogo.
+Al iniciar el programa se despliega una ventana con tres listas diferentes:
+- La primera lista es fija y contiene el catálogo de productos por defecto, con los respectivos nombres, precio unitario y código, también esta lista posee una caja de texto debajo con la etiqueta “Cantidad”. Los productos pueden ser seleccionados de la lista.
+- La segunda lista contiene los productos de la orden actual y pueden ser agregados productos seleccionandolos del catálogo, especificando una cantidad superior a cero en la caja de texto inferior a la primera lista y luego presionando el botón “agregar a la orden”, y eliminados seleccionandolos en esta lista y luego presionando el botón “Eliminar Order Item”.
+- La tercera ventana permite visualizar las órdenes creadas con el respectivo código de la orden y al seleccionar la orden en esta lista, los productos que contiene esta pueden ser visualizados en la segunda lista.
