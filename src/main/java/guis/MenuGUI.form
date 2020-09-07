@@ -176,6 +176,14 @@
           <text value="Eliminar Order Item"/>
         </properties>
       </component>
+      <component id="7df44" class="javax.swing.JButton" binding="eliminarOrdenButton" default-binding="true">
+        <constraints>
+          <grid row="7" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Eliminar Orden"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

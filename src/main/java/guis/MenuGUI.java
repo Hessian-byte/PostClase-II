@@ -27,6 +27,7 @@ public class MenuGUI extends JFrame implements ActionListener {
     private JTextField textField2;
     private JButton emitirOrdenButton;
     private JTable ordenesTabla;
+    private JButton eliminarOrdenButton;
     private Menu menu;
 
 
@@ -39,6 +40,10 @@ public class MenuGUI extends JFrame implements ActionListener {
         this.pack();
         this.setResizable(true);
         agregarALaOrdenButton.addActionListener(this);
+        eliminarOrderItemButton.addActionListener(this);
+        deseaAgregarUnNumeroCheckBox.addActionListener(this);
+        emitirOrdenButton.addActionListener(this);
+        eliminarOrdenButton.addActionListener(this);
 
     }
 
@@ -74,6 +79,9 @@ public class MenuGUI extends JFrame implements ActionListener {
             }
             ordenModeloTabla.removeRow(filaSelecionada);
             ordenTabla.setModel(ordenModeloTabla);
+        }
+        if(e.getSource() == deseaAgregarUnNumeroCheckBox){
+
         }
     }
 
