@@ -103,19 +103,41 @@ public class MenuGUI extends JFrame implements ActionListener {
                     Order or = new Order(nombreOrden,orderItems);
                     ordenesEmitidosModeloTabla.addRow(or.getArrayObject());
                     ordenesEmitidosTabla.setModel(ordenesEmitidosModeloTabla);
+                    terminarEmitirOrden();
 
                 }else{ // PhoneOrder, falta hacer la validacion si es un numero
                     PhoneOrder phoneOrder = new PhoneOrder(nombreOrden,orderItems,numeroTelefonotextField.getText());
                     ordenesEmitidosModeloTabla.addRow(phoneOrder.getArrayObject());
                     ordenesEmitidosTabla.setModel(ordenesEmitidosModeloTabla);
+                    terminarEmitirOrden();
 
                 }
             }else{
                 JOptionPane.showMessageDialog(menuGui,"Ingrese un nombre a la Orden","Error",JOptionPane.ERROR_MESSAGE);
             }
         }
+        if(e.getSource()== eliminarOrdenButton){
+            int filaSelecionada = ordenesEmitidosTabla.getSelectedRow();
+            if (filaSelecionada == -1){
+                JOptionPane.showMessageDialog(menuGui,"Usted no ha seleccionado una orden","Error",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            ordenesEmitidosModeloTabla.removeRow(filaSelecionada);
+            ordenesEmitidosTabla.setModel(ordenesEmitidosModeloTabla);
+        }
     }
-
+    private void terminarEmitirOrden(){
+        nombreOrdenTextField.setText("");
+        deseaAgregarUnNumeroCheckBox.setSelected(false);
+        numeroTelefonotextField.setText("");
+        numeroTelefonotextField.setEditable(false);
+        while(orderItems.size()>0){
+            ordenModeloTabla.removeRow(0);
+            orderItems.remove(0);
+            ordenTabla.setModel(ordenModeloTabla);
+        }
+        orderItems.clear();
+    }
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
