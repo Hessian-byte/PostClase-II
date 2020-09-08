@@ -1,3 +1,6 @@
+
+*Desarrolladores:* Lorenzo Devia y Lucas Palminio 
+
 Este programa al ser ejecutado sirve como visualizador de un catálogo de compras y para confeccionar órdenes de productos a partir del catálogo.
 Al iniciar el programa se despliega una ventana con tres listas diferentes:
 - La primera tabla es fija y contiene el catálogo de productos por defecto, con los respectivos nombres, precio unitario y código, también esta tabla posee una caja de texto debajo con la etiqueta “Cantidad”. Los productos pueden ser seleccionados de la lista.

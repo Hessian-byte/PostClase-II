@@ -107,7 +107,7 @@ public class MenuGUI extends JFrame implements ActionListener {
 
                 }else{ // PhoneOrder, los números telefónicos deben contener 9 dígitos
                     String telefono = numeroTelefonotextField.getText().replace(" ","");
-                    if(telefono.matches("[0-9]+") || telefono.length() == 9) {
+                    if(telefono.matches("[0-9]+") && telefono.length() == 9) {
                         PhoneOrder phoneOrder = new PhoneOrder(nombreOrden, orderItems, numeroTelefonotextField.getText());
                         ordenesEmitidosModeloTabla.addRow(phoneOrder.getArrayObject());
                         ordenesEmitidosTabla.setModel(ordenesEmitidosModeloTabla);
