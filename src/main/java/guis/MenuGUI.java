@@ -105,11 +105,19 @@ public class MenuGUI extends JFrame implements ActionListener {
                     ordenesEmitidosTabla.setModel(ordenesEmitidosModeloTabla);
                     terminarEmitirOrden();
 
-                }else{ // PhoneOrder, falta hacer la validacion si es un numero
-                    PhoneOrder phoneOrder = new PhoneOrder(nombreOrden,orderItems,numeroTelefonotextField.getText());
-                    ordenesEmitidosModeloTabla.addRow(phoneOrder.getArrayObject());
-                    ordenesEmitidosTabla.setModel(ordenesEmitidosModeloTabla);
-                    terminarEmitirOrden();
+                }else{ // PhoneOrder, los números telefónicos deben contener 9 dígitos
+                    String telefono = numeroTelefonotextField.getText().replace(" ","");
+                    if(telefono.matches("[0-9]+") || telefono.length() == 9) {
+                        PhoneOrder phoneOrder = new PhoneOrder(nombreOrden, orderItems, numeroTelefonotextField.getText());
+                        ordenesEmitidosModeloTabla.addRow(phoneOrder.getArrayObject());
+                        ordenesEmitidosTabla.setModel(ordenesEmitidosModeloTabla);
+                        terminarEmitirOrden();
+
+
+                    }else{
+
+                        JOptionPane.showMessageDialog(menuGui,"El número telefónico no es válido, debe contener solo números y estos deben ser 9","Error",JOptionPane.ERROR_MESSAGE);
+                    }
 
                 }
             }else{
