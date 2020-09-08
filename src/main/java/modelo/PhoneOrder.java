@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class PhoneOrder extends Order{
     private String callbackNumber;
 
-    public PhoneOrder(int totalPrice, ArrayList<OrderItem> orderItems, MenuItem chosenMenu, String callbackNumber) {
-        super(totalPrice, orderItems, chosenMenu);
+    public PhoneOrder(String nombre,ArrayList<OrderItem> orderItems, String callbackNumber) {
+        super(nombre,orderItems);
         this.callbackNumber = callbackNumber;
     }
 
@@ -16,5 +16,10 @@ public class PhoneOrder extends Order{
 
     public void setCallbackNumber(String callbackNumber) {
         this.callbackNumber = callbackNumber;
+    }
+
+    public Object[] getArrayObject(){
+        Object[] array = {super.getNombre(),super.getTotalPrice(),callbackNumber};
+        return array;
     }
 }

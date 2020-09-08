@@ -6,10 +6,11 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import modelo.*;
 import modelo.Menu;
 import modelo.MenuItem;
-import modelo.OrderItem;
 
 public class MenuGUI extends JFrame implements ActionListener {
     private JPanel menuGui;
@@ -22,18 +23,20 @@ public class MenuGUI extends JFrame implements ActionListener {
     private JTable ordenTabla;
     private DefaultTableModel ordenModeloTabla;
     private JTextField cantidadTextField1;
-    private JTextField textField1;
+    private JTextField nombreOrdenTextField;
     private JCheckBox deseaAgregarUnNumeroCheckBox;
-    private JTextField textField2;
+    private JTextField numeroTelefonotextField;
     private JButton emitirOrdenButton;
-    private JTable ordenesTabla;
+    private JTable ordenesEmitidosTabla;
     private JButton eliminarOrdenButton;
     private Menu menu;
-
+    private DefaultTableModel ordenesEmitidosModeloTabla;
+    private ArrayList<OrderItem> orderItems;
 
 
     public MenuGUI(Menu menu) throws HeadlessException {
         this.menu = menu; //el menu debe ser creado antes de lanzar la ventana, para ello se crea el menu en el Launcher
+        this.orderItems = new ArrayList<>();
         setLayout(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setContentPane(menuGui);
@@ -44,6 +47,7 @@ public class MenuGUI extends JFrame implements ActionListener {
         deseaAgregarUnNumeroCheckBox.addActionListener(this);
         emitirOrdenButton.addActionListener(this);
         eliminarOrdenButton.addActionListener(this);
+        numeroTelefonotextField.setEditable(false);
 
     }
 
@@ -62,6 +66,8 @@ public class MenuGUI extends JFrame implements ActionListener {
                 if (cantidad>0){
                     OrderItem oi = new OrderItem(menuItemSeleccionado,cantidad);
                     ordenModeloTabla.addRow(oi.getArrayObject());
+                    orderItems.add(oi);
+
 
                 }else{
                     JOptionPane.showMessageDialog(menuGui,"La cantidad no puede ser 0 ó negativa","Error",JOptionPane.ERROR_MESSAGE);
@@ -78,10 +84,35 @@ public class MenuGUI extends JFrame implements ActionListener {
                 return;
             }
             ordenModeloTabla.removeRow(filaSelecionada);
+            orderItems.remove(filaSelecionada);
             ordenTabla.setModel(ordenModeloTabla);
         }
         if(e.getSource() == deseaAgregarUnNumeroCheckBox){
+            if (deseaAgregarUnNumeroCheckBox.isSelected()){
+                numeroTelefonotextField.setEditable(true);
+            }else{
+                numeroTelefonotextField.setEditable(false);
+                numeroTelefonotextField.setText("");
+            }
 
+        }
+        if (e.getSource()==emitirOrdenButton){
+            String nombreOrden = nombreOrdenTextField.getText();
+            if (!nombreOrden.equals("") && ordenModeloTabla.getRowCount() != 0){ // Si el nombre NO esta vacio y que haya elementos en la Orden
+                if(numeroTelefonotextField.getText().equals("") ){ //Order
+                    Order or = new Order(nombreOrden,orderItems);
+                    ordenesEmitidosModeloTabla.addRow(or.getArrayObject());
+                    ordenesEmitidosTabla.setModel(ordenesEmitidosModeloTabla);
+
+                }else{ // PhoneOrder, falta hacer la validacion si es un numero
+                    PhoneOrder phoneOrder = new PhoneOrder(nombreOrden,orderItems,numeroTelefonotextField.getText());
+                    ordenesEmitidosModeloTabla.addRow(phoneOrder.getArrayObject());
+                    ordenesEmitidosTabla.setModel(ordenesEmitidosModeloTabla);
+
+                }
+            }else{
+                JOptionPane.showMessageDialog(menuGui,"Ingrese un nombre a la Orden","Error",JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
@@ -106,6 +137,13 @@ public class MenuGUI extends JFrame implements ActionListener {
         catalogoModeloTabla.addRow(menu.getArrayMenuItem(2));
         catalogoTabla = new JTable(catalogoModeloTabla);
         ordenTabla = new JTable(ordenModeloTabla);
+
+        ordenesEmitidosModeloTabla = new DefaultTableModel();
+        ordenesEmitidosModeloTabla.addColumn("Nombre de la orden");
+        ordenesEmitidosModeloTabla.addColumn("Precio total");
+        ordenesEmitidosModeloTabla.addColumn("Numero de telefono");
+        ordenesEmitidosTabla = new JTable(ordenesEmitidosModeloTabla);
+
 
     }
 }

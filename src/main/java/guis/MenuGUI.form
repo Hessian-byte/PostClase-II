@@ -75,7 +75,7 @@
           <text value="Orden Actual"/>
         </properties>
       </component>
-      <component id="2ce82" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+      <component id="2ce82" class="javax.swing.JTextField" binding="nombreOrdenTextField">
         <constraints>
           <grid row="8" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -99,7 +99,7 @@
           <text value="Numero de telefono"/>
         </properties>
       </component>
-      <component id="b420b" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+      <component id="b420b" class="javax.swing.JTextField" binding="numeroTelefonotextField">
         <constraints>
           <grid row="10" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -122,7 +122,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="363ab" class="javax.swing.JTable" binding="ordenesTabla" custom-create="true">
+          <component id="363ab" class="javax.swing.JTable" binding="ordenesEmitidosTabla" custom-create="true">
             <constraints/>
             <properties/>
           </component>
